@@ -1,5 +1,5 @@
 export const FIXED_DASHBOARD_RANGES = ["90m", "24h", "7d", "30d"] as const;
-export const PROJECT_REPOSITORY_URL = "https://github.com/WizisCool/model-status";
+export const PROJECT_REPOSITORY_URL = "https://github.com/airmantang-svg/model-status";
 
 export type DashboardRange = (typeof FIXED_DASHBOARD_RANGES)[number];
 
