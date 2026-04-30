@@ -1,8 +1,6 @@
 services:
   model-status:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/airmantang-svg/model-status:deploy-status-open-modalk
     container_name: model-status
     restart: unless-stopped
     env_file:

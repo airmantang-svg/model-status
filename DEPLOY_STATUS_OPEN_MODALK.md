@@ -2,21 +2,32 @@
 
 ## Local workflow
 
-1. Copy production env template:
+1. Build the production image locally:
+
+```bash
+docker build -t ghcr.io/airmantang-svg/model-status:deploy-status-open-modalk .
+```
+
+2. Log in to GHCR:
+
+```bash
+echo <github_pat> | docker login ghcr.io -u airmantang-svg --password-stdin
+```
+
+3. Push the image:
+
+```bash
+docker push ghcr.io/airmantang-svg/model-status:deploy-status-open-modalk
+```
+
+4. For local verification, copy the production env template and start the already-built image:
 
 ```bash
 cp .env.production.example .env
+docker compose up -d
 ```
 
-2. Adjust values in `.env` for the target environment.
-
-3. Build and run locally with Docker Compose:
-
-```bash
-docker compose up -d --build
-```
-
-4. Verify health endpoint:
+5. Verify health endpoint:
 
 ```bash
 curl http://127.0.0.1:3000/api/health
@@ -37,17 +48,27 @@ Suggested deployment flow on the server:
 1. Clone this fork into `/opt/model-status/app`
 2. Copy `.env.production.example` to `/opt/model-status/app/.env`
 3. Update production secrets and domain values
-4. Start the stack:
+4. Log in to GHCR on the server if the package is private
+5. Pull and start the stack:
 
 ```bash
-docker compose up -d --build
+docker compose pull
+docker compose up -d
+```
+
+6. For later updates:
+
+```bash
+git pull
+docker compose pull
+docker compose up -d
 ```
 
 ## Required production env values
 
 ```env
 HOST=0.0.0.0
-PORT=3000
+PORT=3100
 WEB_ORIGIN=https://status.open.modalk.com
 ACCESS_URL=https://status.open.modalk.com
 DATABASE_FILE=/app/data/model-status.db
@@ -55,6 +76,8 @@ ADMIN_BOOTSTRAP_USERNAME=admin
 ADMIN_BOOTSTRAP_PASSWORD=<strong-password>
 SESSION_SECRET=<long-random-secret>
 ```
+
+`open.modalk.com` already uses `127.0.0.1:3000`, so `model-status` should use `127.0.0.1:3100` on this server.
 
 ## Reverse proxy
 
