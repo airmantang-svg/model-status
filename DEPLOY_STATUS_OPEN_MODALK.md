@@ -1,4 +1,4 @@
-# Deploying to status.open.modalk.com
+# Deploying to status-open.modalk.com
 
 ## Local workflow
 
@@ -69,8 +69,8 @@ docker compose up -d
 ```env
 HOST=0.0.0.0
 PORT=3100
-WEB_ORIGIN=https://status.open.modalk.com
-ACCESS_URL=https://status.open.modalk.com
+WEB_ORIGIN=https://status-open.modalk.com
+ACCESS_URL=https://status-open.modalk.com
 DATABASE_FILE=/app/data/model-status.db
 ADMIN_BOOTSTRAP_USERNAME=admin
 ADMIN_BOOTSTRAP_PASSWORD=<strong-password>
@@ -83,8 +83,8 @@ SESSION_SECRET=<long-random-secret>
 
 Nginx should proxy:
 
-- `https://status.open.modalk.com`
-- to `http://127.0.0.1:3000`
+- `https://status-open.modalk.com`
+- to `http://127.0.0.1:3100`
 
 ## First-time app setup
 
