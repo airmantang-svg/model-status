@@ -30,7 +30,7 @@ docker compose up -d
 5. Verify health endpoint:
 
 ```bash
-curl http://127.0.0.1:3000/api/health
+curl http://127.0.0.1:3100/api/health
 ```
 
 ## Server layout
@@ -85,6 +85,12 @@ Nginx should proxy:
 
 - `https://status-open.modalk.com`
 - to `http://127.0.0.1:3100`
+
+Current production state:
+
+- HTTP requests are redirected to HTTPS
+- TLS is issued by Let's Encrypt for `status-open.modalk.com`
+- HSTS is enabled: `Strict-Transport-Security: max-age=31536000; includeSubDomains`
 
 ## First-time app setup
 
